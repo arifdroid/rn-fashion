@@ -3,14 +3,15 @@ import React from 'react'
 
 interface SlideProps {
     label: string,
-    right?: boolean
+    right?: boolean,
+    id_active?: number,
 }
 
 
 const { width, height } = Dimensions.get('window');
 export const SLIDE_HEIGHT = 0.61 * height
 
-export default function Slide({ label, right }: SlideProps) {
+export default function Slide({ label, right, id_active }: SlideProps) {
 
     const transform = [
         { translateY: (SLIDE_HEIGHT - 100) / 2 },

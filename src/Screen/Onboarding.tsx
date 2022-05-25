@@ -3,6 +3,7 @@ import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 import Slide from './Slide'
 import Animated, { useValue, useSharedValue, interpolateColor, useAnimatedStyle, useDerivedValue, interpolate, useAnimatedScrollHandler, } from 'react-native-reanimated';
+import Subslide from './Subslide';
 // import { onScroll } from 'react-native-redash';
 
 const { width, height } = Dimensions.get('window');
@@ -11,7 +12,6 @@ const slides = ['Relax', 'Cool', 'Maverick', 'Eccentrice']
 
 export default function Onboarding() {
   const x = useSharedValue(0);
-  // const x2 = useSharedValue(0);
   const scrollOffset = useSharedValue(0);
 
   //TODO: onsScrollEvent
@@ -24,10 +24,26 @@ export default function Onboarding() {
   });
 
   const slides = [
-    { label: 'Relaxed', color: "#BFEAF5" },
-    { label: 'Cool', color: "#BEECC4" },
-    { label: 'Eccentric', color: "#FFE4D9" },
-    { label: 'Funky', color: "#FFDDDD" }
+    {
+      label: 'Relaxed', color: "#BFEAF5",
+      subtitle: 'Find your outfits',
+      description: 'Dont worry! Find the best outfit here!'
+    },
+    {
+      label: 'Cool', color: "#BEECC4",
+      subtitle: 'Find your outfits',
+      description: 'Dont worry! Find the best outfit here!'
+    },
+    {
+      label: 'Eccentric', color: "#FFE4D9",
+      subtitle: 'Find your outfits',
+      description: 'Dont worry! Find the best outfit here!'
+    },
+    {
+      label: 'Funky', color: "#FFDDDD",
+      subtitle: 'Find your outfits',
+      description: 'Dont worry! Find the best outfit here!'
+    }
   ]
 
   const rStyle = useAnimatedStyle(() => {
@@ -62,11 +78,11 @@ export default function Onboarding() {
           bounces={false}
 
         >
-          {slides.map(({ label, }, index) => <Slide key={index} right={!(index % 2)} {...{ label }} />)}
+          {slides.map(({ label, }, index) => <Slide key={index} right={!!(index % 2)} {...{ label }} />)}
 
           {/* <Slide label='Relax' />
           <Slide label='Playful' right />
-          <Slide label='Eccentric' />
+          <Slide label='Eccentric' /> 
           <Slide label='Funky' right /> */}
 
         </Animated.ScrollView>
@@ -75,7 +91,13 @@ export default function Onboarding() {
         <Animated.View
           style={[{ ...StyleSheet.absoluteFill, backgroundColor: 'cyan' }, rStyle]}
         >
-          <View style={{ flex: 1, backgroundColor: "white", borderTopLeftRadius: 75 }}>
+          <View style={[styles.footerContent, { width: width * slides.length, flex:1 }]}>
+
+            {slides.map(({ subtitle, description, }, index) => {
+
+              return (
+                <Subslide key={index} last={index === slides.length - 1} right={!!(index % 2)} {...{ subtitle, description, x }} />)
+            })}
 
           </View>
 
@@ -98,5 +120,8 @@ const styles = StyleSheet.create({
   footer: {
     flex: 0.39 * height,
     backgroundColor: 'white'
+  },
+  footerContent: {
+     backgroundColor: "white", borderTopLeftRadius: 75,
   }
 })
