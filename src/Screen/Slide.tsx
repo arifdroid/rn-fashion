@@ -21,7 +21,7 @@ export default function Slide({ label, right }: SlideProps) {
     return (
         <View style={styles.container}>
             <View style={[styles.titleContainer, { transform }]}>
-                <Text style={styles.title}>Slide</Text>
+                <Text style={styles.title}>{label}</Text>
             </View>
             <Text>Slide</Text>
         </View>
@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
         width,
 
     },
-    titleContainer: {
-        // backgroundColor: 'red',
+    titleContainer: {        
         height: 100,
         justifyContent: 'center',
         transform: [
